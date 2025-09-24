@@ -10,10 +10,10 @@
     "budget": 800.0
   },
   "formulation_result": {
-    "total_cost": 480.0,
-    "predicted_efficacy": 0.1839208333333333,
-    "safety_score": 9.25,
-    "synergy_score": 0.4666666666666666,
+    "total_cost": 582.0,
+    "predicted_efficacy": 0.20975,
+    "safety_score": 9.4,
+    "synergy_score": 0.6,
     "stability_months": 16,
     "selected_ingredients": {
       "H.CT": {
@@ -35,11 +35,16 @@
         "name": "Hyaluronic Acid",
         "percentage": 1.2,
         "reasoning": "Selected for dryness targeting: High efficacy, Excellent safety profile, Good stability, Strong clinical evidence"
+      },
+      "H.BR": {
+        "name": "Cholesterol",
+        "percentage": 2.4,
+        "reasoning": "Selected for dryness targeting: Excellent safety profile, Good stability, Cost-effective, Strong clinical evidence"
       }
     }
   },
   "database_info": {
-    "total_hypergredients": 10,
+    "total_hypergredients": 16,
     "classes": [
       "H.CT",
       "H.CS",

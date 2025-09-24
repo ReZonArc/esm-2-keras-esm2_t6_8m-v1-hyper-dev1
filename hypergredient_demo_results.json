@@ -101,5 +101,410 @@
       "risk_benefit_ratio": 7.0,
       "clinical_evidence": "moderate"
     }
+  },
+  "ai_predictions": {
+    "model_version": "v1.0",
+    "predictions": [
+      {
+        "ingredient_class": "H.CT",
+        "confidence": 1.0,
+        "reasoning": "Strong anti-aging efficacy predicted; High concern complexity detected; Gentleness prioritized"
+      },
+      {
+        "ingredient_class": "H.CS",
+        "confidence": 1.0,
+        "reasoning": "Collagen synthesis highly beneficial; High concern complexity detected; Gentleness prioritized"
+      },
+      {
+        "ingredient_class": "H.AO",
+        "confidence": 1.0,
+        "reasoning": "Antioxidant protection recommended; High concern complexity detected; Gentleness prioritized"
+      },
+      {
+        "ingredient_class": "H.ML",
+        "confidence": 1.0,
+        "reasoning": "Brightening effects suitable; High concern complexity detected; Gentleness prioritized"
+      },
+      {
+        "ingredient_class": "H.HY",
+        "confidence": 1.0,
+        "reasoning": "Hydration enhancement predicted; High concern complexity detected; Gentleness prioritized"
+      }
+    ],
+    "confidence_scores": {
+      "H.CT": 1.0,
+      "H.CS": 1.0,
+      "H.AO": 1.0,
+      "H.ML": 1.0,
+      "H.HY": 1.0
+    },
+    "feature_importance": {
+      "concern_complexity": 0.35,
+      "skin_sensitivity": 0.25,
+      "budget_normalized": 0.2,
+      "preference_gentleness": 0.15,
+      "preference_effectiveness": 0.05
+    }
+  },
+  "evolution_report": {
+    "current_generation": 1,
+    "performance_history": [
+      {
+        "generation": 0,
+        "efficacy": 0.209625,
+        "safety": 9.0,
+        "synergy": 0.5866666666666667,
+        "cost": 677.0
+      }
+    ],
+    "market_feedback": [
+      {
+        "generation": 0,
+        "feedback": {
+          "efficacy_rating": 7.5,
+          "safety_rating": 9.0,
+          "user_satisfaction": 8.2,
+          "improvement_requests": [
+            "more moisturizing",
+            "faster results"
+          ]
+        },
+        "timestamp": 0
+      }
+    ],
+    "current_formula": {
+      "total_cost": 816.0,
+      "predicted_efficacy": 0.21935,
+      "safety_score": 9.4,
+      "synergy_score": 0.6,
+      "stability_months": 16,
+      "selected_ingredients": {
+        "H.CT": {
+          "name": "Bakuchiol",
+          "percentage": 1.0,
+          "reasoning": "Selected for wrinkles targeting: Excellent safety profile, Good stability"
+        },
+        "H.CS": {
+          "name": "Matrixyl 3000",
+          "percentage": 3.0,
+          "reasoning": "Selected for wrinkles targeting: High efficacy, Excellent safety profile, Good stability, Strong clinical evidence"
+        },
+        "H.AO": {
+          "name": "Astaxanthin",
+          "percentage": 0.5,
+          "reasoning": "Selected for firmness targeting: High efficacy, Excellent safety profile, Strong clinical evidence"
+        },
+        "H.HY": {
+          "name": "Hyaluronic Acid",
+          "percentage": 1.2,
+          "reasoning": "Selected for dryness targeting: High efficacy, Excellent safety profile, Good stability, Strong clinical evidence"
+        },
+        "H.BR": {
+          "name": "Ceramide NP",
+          "percentage": 2.4,
+          "reasoning": "Selected for dryness targeting: High efficacy, Excellent safety profile, Good stability, Strong clinical evidence"
+        }
+      }
+    },
+    "evolution_metrics": {
+      "evolution_not_available": true
+    }
+  },
+  "visualization_report": {
+    "title": "\ud83e\uddec Hypergredient Formulation Analysis Report",
+    "timestamp": "Generated with Hypergredient Framework v1.0",
+    "formulation_overview": {
+      "formulation_id": "HF-7088",
+      "target_concerns": [
+        "wrinkles",
+        "firmness"
+      ],
+      "skin_type": "normal_to_dry",
+      "budget_allocated": "R677.00 / R800.00",
+      "budget_utilization": "84.6%",
+      "total_ingredients": 6,
+      "predicted_outcomes": {
+        "efficacy": "21.0%",
+        "safety_score": "9.0/10",
+        "synergy_bonus": "0.59",
+        "stability": "15 months"
+      }
+    },
+    "performance_radar": {
+      "chart_type": "radar",
+      "data": {
+        "Efficacy": 20.962500000000002,
+        "Safety": 90.0,
+        "Synergy": 58.666666666666664,
+        "Stability": 62.5,
+        "Cost Efficiency": 32.3
+      },
+      "description": "Multi-dimensional performance analysis",
+      "interpretation": {
+        "strengths": [
+          "Safety"
+        ],
+        "areas_for_improvement": [
+          "Efficacy",
+          "Cost Efficiency"
+        ]
+      }
+    },
+    "ingredient_breakdown": {
+      "ingredients": [
+        {
+          "class": "H.CS",
+          "name": "Matrixyl 3000",
+          "inci_name": "Palmitoyl Tripeptide-1, Palmitoyl Tetrapeptide-7",
+          "percentage": 3.0,
+          "cost": 180.0,
+          "cost_per_percent": 60.0,
+          "efficacy_score": 9.0,
+          "safety_score": 9.0,
+          "primary_function": "Signal peptide collagen stimulation",
+          "secondary_functions": [
+            "Wrinkle reduction",
+            "Skin firmness"
+          ],
+          "reasoning": "Selected for wrinkles targeting: High efficacy, Excellent safety profile, Good stability, Strong clinical evidence"
+        },
+        {
+          "class": "H.CT",
+          "name": "Bakuchiol",
+          "inci_name": "Bakuchiol",
+          "percentage": 1.0,
+          "cost": 120.0,
+          "cost_per_percent": 120.0,
+          "efficacy_score": 7.0,
+          "safety_score": 9.0,
+          "primary_function": "Gentle retinol alternative",
+          "secondary_functions": [
+            "Antioxidant",
+            "Anti-inflammatory"
+          ],
+          "reasoning": "Selected for wrinkles targeting: Excellent safety profile, Good stability"
+        },
+        {
+          "class": "H.BR",
+          "name": "Cholesterol",
+          "inci_name": "Cholesterol",
+          "percentage": 2.4,
+          "cost": 102.0,
+          "cost_per_percent": 42.5,
+          "efficacy_score": 6.0,
+          "safety_score": 10.0,
+          "primary_function": "Barrier lipid component",
+          "secondary_functions": [
+            "Membrane fluidity"
+          ],
+          "reasoning": "Selected for dryness targeting: Excellent safety profile, Good stability, Cost-effective, Strong clinical evidence"
+        },
+        {
+          "class": "H.ML",
+          "name": "Kojic Acid",
+          "inci_name": "Kojic Acid",
+          "percentage": 2.0,
+          "cost": 95.0,
+          "cost_per_percent": 47.5,
+          "efficacy_score": 7.0,
+          "safety_score": 7.0,
+          "primary_function": "Tyrosinase inhibitor",
+          "secondary_functions": [
+            "Antioxidant"
+          ],
+          "reasoning": "Selected for dullness targeting: Cost-effective"
+        },
+        {
+          "class": "H.AO",
+          "name": "Astaxanthin",
+          "inci_name": "Astaxanthin",
+          "percentage": 0.5,
+          "cost": 90.0,
+          "cost_per_percent": 180.0,
+          "efficacy_score": 9.0,
+          "safety_score": 9.0,
+          "primary_function": "Powerful antioxidant protection",
+          "secondary_functions": [
+            "UV protection",
+            "Anti-inflammatory"
+          ],
+          "reasoning": "Selected for firmness targeting: High efficacy, Excellent safety profile, Strong clinical evidence"
+        },
+        {
+          "class": "H.HY",
+          "name": "Hyaluronic Acid",
+          "inci_name": "Sodium Hyaluronate",
+          "percentage": 1.2,
+          "cost": 90.0,
+          "cost_per_percent": 75.0,
+          "efficacy_score": 8.0,
+          "safety_score": 10.0,
+          "primary_function": "Multi-depth hydration",
+          "secondary_functions": [
+            "Plumping",
+            "Barrier support"
+          ],
+          "reasoning": "Selected for dryness targeting: High efficacy, Excellent safety profile, Good stability, Strong clinical evidence"
+        }
+      ],
+      "summary": {
+        "total_actives_percentage": 10.1,
+        "most_expensive": "Matrixyl 3000",
+        "highest_efficacy": "Matrixyl 3000",
+        "safest_ingredient": "Cholesterol"
+      }
+    },
+    "cost_analysis": {
+      "breakdown": [
+        {
+          "category": "H.CS",
+          "ingredient": "Matrixyl 3000",
+          "cost": 180.0,
+          "percentage_of_budget": 26.587887740029544,
+          "cost_per_gram": 120.0,
+          "usage_amount": 3.0
+        },
+        {
+          "category": "H.CT",
+          "ingredient": "Bakuchiol",
+          "cost": 120.0,
+          "percentage_of_budget": 17.725258493353028,
+          "cost_per_gram": 240.0,
+          "usage_amount": 1.0
+        },
+        {
+          "category": "H.BR",
+          "ingredient": "Cholesterol",
+          "cost": 102.0,
+          "percentage_of_budget": 15.066469719350073,
+          "cost_per_gram": 85.0,
+          "usage_amount": 2.4
+        },
+        {
+          "category": "H.ML",
+          "ingredient": "Kojic Acid",
+          "cost": 95.0,
+          "percentage_of_budget": 14.032496307237812,
+          "cost_per_gram": 95.0,
+          "usage_amount": 2.0
+        },
+        {
+          "category": "H.AO",
+          "ingredient": "Astaxanthin",
+          "cost": 90.0,
+          "percentage_of_budget": 13.293943870014772,
+          "cost_per_gram": 360.0,
+          "usage_amount": 0.5
+        },
+        {
+          "category": "H.HY",
+          "ingredient": "Hyaluronic Acid",
+          "cost": 90.0,
+          "percentage_of_budget": 13.293943870014772,
+          "cost_per_gram": 150.0,
+          "usage_amount": 1.2
+        }
+      ],
+      "cost_efficiency_metrics": {
+        "cost_per_efficacy_point": 32.29576624925462,
+        "cost_per_safety_point": 75.22222222222223,
+        "premium_ingredients": [
+          {
+            "category": "H.CT",
+            "ingredient": "Bakuchiol",
+            "cost": 120.0,
+            "percentage_of_budget": 17.725258493353028,
+            "cost_per_gram": 240.0,
+            "usage_amount": 1.0
+          },
+          {
+            "category": "H.AO",
+            "ingredient": "Astaxanthin",
+            "cost": 90.0,
+            "percentage_of_budget": 13.293943870014772,
+            "cost_per_gram": 360.0,
+            "usage_amount": 0.5
+          }
+        ],
+        "budget_friendly": [
+          {
+            "category": "H.BR",
+            "ingredient": "Cholesterol",
+            "cost": 102.0,
+            "percentage_of_budget": 15.066469719350073,
+            "cost_per_gram": 85.0,
+            "usage_amount": 2.4
+          },
+          {
+            "category": "H.ML",
+            "ingredient": "Kojic Acid",
+            "cost": 95.0,
+            "percentage_of_budget": 14.032496307237812,
+            "cost_per_gram": 95.0,
+            "usage_amount": 2.0
+          }
+        ]
+      }
+    },
+    "synergy_network": {
+      "interactions": [
+        {
+          "source": "H.CT",
+          "target": "H.CS",
+          "strength": 1.5,
+          "type": "synergy",
+          "description": "H.CT and H.CS have complementary benefits"
+        },
+        {
+          "source": "H.CT",
+          "target": "H.AO",
+          "strength": 0.8,
+          "type": "antagonism",
+          "description": "H.CT and H.AO have neutral interaction"
+        },
+        {
+          "source": "H.CS",
+          "target": "H.AO",
+          "strength": 2.0,
+          "type": "synergy",
+          "description": "H.CS and H.AO work synergistically to enhance overall performance"
+        },
+        {
+          "source": "H.CS",
+          "target": "H.HY",
+          "strength": 1.6,
+          "type": "synergy",
+          "description": "H.CS and H.HY work synergistically to enhance overall performance"
+        },
+        {
+          "source": "H.AO",
+          "target": "H.ML",
+          "strength": 1.8,
+          "type": "synergy",
+          "description": "H.AO and H.ML work synergistically to enhance overall performance"
+        },
+        {
+          "source": "H.HY",
+          "target": "H.BR",
+          "strength": 2.5,
+          "type": "synergy",
+          "description": "H.HY and H.BR work synergistically to enhance overall performance"
+        }
+      ],
+      "network_strength": 0.5866666666666667,
+      "positive_interactions": 5,
+      "negative_interactions": 1,
+      "network_description": "Good ingredient network with moderate synergistic effects"
+    },
+    "risk_assessment": {
+      "overall_risk_level": "low",
+      "safety_score": 9.0,
+      "individual_risks": [],
+      "formulation_warnings": [],
+      "recommendations": []
+    },
+    "recommendations": [
+      "\ud83d\udee1\ufe0f Add stabilizing ingredients or improve packaging to extend shelf life"
+    ]
   }
 }
