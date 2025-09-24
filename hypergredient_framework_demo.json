@@ -1,0 +1,56 @@
+{
+  "formulation_request": {
+    "target_concerns": [
+      "wrinkles",
+      "firmness"
+    ],
+    "secondary_concerns": [
+      "dryness"
+    ],
+    "budget": 800.0
+  },
+  "formulation_result": {
+    "total_cost": 480.0,
+    "predicted_efficacy": 0.1839208333333333,
+    "safety_score": 9.25,
+    "synergy_score": 0.4666666666666666,
+    "stability_months": 16,
+    "selected_ingredients": {
+      "H.CT": {
+        "name": "Bakuchiol",
+        "percentage": 1.0,
+        "reasoning": "Selected for wrinkles targeting: Excellent safety profile, Good stability"
+      },
+      "H.CS": {
+        "name": "Matrixyl 3000",
+        "percentage": 3.0,
+        "reasoning": "Selected for wrinkles targeting: High efficacy, Excellent safety profile, Good stability, Strong clinical evidence"
+      },
+      "H.AO": {
+        "name": "Astaxanthin",
+        "percentage": 0.5,
+        "reasoning": "Selected for firmness targeting: High efficacy, Excellent safety profile, Strong clinical evidence"
+      },
+      "H.HY": {
+        "name": "Hyaluronic Acid",
+        "percentage": 1.2,
+        "reasoning": "Selected for dryness targeting: High efficacy, Excellent safety profile, Good stability, Strong clinical evidence"
+      }
+    }
+  },
+  "database_info": {
+    "total_hypergredients": 10,
+    "classes": [
+      "H.CT",
+      "H.CS",
+      "H.AO",
+      "H.BR",
+      "H.ML",
+      "H.HY",
+      "H.AI",
+      "H.MB",
+      "H.SE",
+      "H.PD"
+    ]
+  }
+}

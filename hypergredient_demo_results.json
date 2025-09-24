@@ -1,0 +1,105 @@
+{
+  "formulation_result": {
+    "request": {
+      "target_concerns": [
+        "wrinkles",
+        "firmness"
+      ],
+      "budget": 800.0,
+      "skin_type": "normal_to_dry"
+    },
+    "result": {
+      "total_cost": 677.0,
+      "predicted_efficacy": 0.209625,
+      "safety_score": 9.0,
+      "synergy_score": 0.5866666666666667,
+      "stability_months": 15,
+      "selected_ingredients": {
+        "H.CT": {
+          "name": "Bakuchiol",
+          "percentage": 1.0,
+          "cost": 120.0,
+          "reasoning": "Selected for wrinkles targeting: Excellent safety profile, Good stability"
+        },
+        "H.CS": {
+          "name": "Matrixyl 3000",
+          "percentage": 3.0,
+          "cost": 180.0,
+          "reasoning": "Selected for wrinkles targeting: High efficacy, Excellent safety profile, Good stability, Strong clinical evidence"
+        },
+        "H.AO": {
+          "name": "Astaxanthin",
+          "percentage": 0.5,
+          "cost": 90.0,
+          "reasoning": "Selected for firmness targeting: High efficacy, Excellent safety profile, Strong clinical evidence"
+        },
+        "H.HY": {
+          "name": "Hyaluronic Acid",
+          "percentage": 1.2,
+          "cost": 90.0,
+          "reasoning": "Selected for dryness targeting: High efficacy, Excellent safety profile, Good stability, Strong clinical evidence"
+        },
+        "H.BR": {
+          "name": "Cholesterol",
+          "percentage": 2.4,
+          "cost": 102.0,
+          "reasoning": "Selected for dryness targeting: Excellent safety profile, Good stability, Cost-effective, Strong clinical evidence"
+        },
+        "H.ML": {
+          "name": "Kojic Acid",
+          "percentage": 2.0,
+          "cost": 95.0,
+          "reasoning": "Selected for dullness targeting: Cost-effective"
+        }
+      }
+    }
+  },
+  "compatibility_analysis": {
+    "compatibility_matrix": {
+      "Retinol + Vitamin C (L-Ascorbic Acid)": "Incompatible",
+      "Retinol + Niacinamide": "Compatible",
+      "Vitamin C (L-Ascorbic Acid) + Niacinamide": "pH Incompatible"
+    },
+    "warnings": [
+      "\u26a0\ufe0f Retinol and Vitamin C (L-Ascorbic Acid) are incompatible",
+      "\u26a0\ufe0f Vitamin C (L-Ascorbic Acid) and Niacinamide have incompatible pH ranges"
+    ],
+    "recommendations": [],
+    "overall_compatibility": "Needs Attention"
+  },
+  "ingredient_profile": {
+    "basic_info": {
+      "name": "Bakuchiol",
+      "inci_name": "Bakuchiol",
+      "class": "H.CT",
+      "primary_function": "Gentle retinol alternative",
+      "secondary_functions": [
+        "Antioxidant",
+        "Anti-inflammatory"
+      ]
+    },
+    "performance_metrics": {
+      "efficacy_score": 7.0,
+      "bioavailability": 0.7,
+      "safety_score": 9.0,
+      "stability_index": 0.9
+    },
+    "formulation_properties": {
+      "ph_range": "4.0-9.0",
+      "cost_per_gram": 240.0,
+      "typical_usage": "1.0%"
+    },
+    "interactions": {
+      "incompatibilities": [],
+      "synergies": [
+        "vitamin_c",
+        "niacinamide"
+      ]
+    },
+    "derived_metrics": {
+      "cost_efficiency": 0.03,
+      "risk_benefit_ratio": 7.0,
+      "clinical_evidence": "moderate"
+    }
+  }
+}

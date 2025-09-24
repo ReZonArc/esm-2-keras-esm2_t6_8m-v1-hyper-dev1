@@ -183,13 +183,15 @@ def main():
     parser = argparse.ArgumentParser(description="Query ESM-2 Hypergraph")
     parser.add_argument("--config", default="config.json", help="Config file path")
     parser.add_argument("--query", choices=[
-        "stats", "attention", "params", "bottlenecks", "path", "subgraph", "structure", "scaling", "speed"
+        "stats", "attention", "params", "bottlenecks", "path", "subgraph", "structure", "scaling", "speed",
+        "hypergredient", "compatibility", "ingredient"
     ], required=True, help="Query type")
     parser.add_argument("--start", help="Start node for path query")
     parser.add_argument("--end", help="End node for path query")
     parser.add_argument("--layer-start", type=int, help="Start layer for subgraph")
     parser.add_argument("--layer-end", type=int, help="End layer for subgraph")
     parser.add_argument("--type", help="Node type to filter")
+    parser.add_argument("--ingredient-id", help="Ingredient ID for ingredient profile query")
     
     args = parser.parse_args()
     
@@ -289,6 +291,88 @@ def main():
         test_lengths = [50, 100, 200, 384, 500, 1000]
         report = analyzer.generate_speed_report(test_lengths)
         print(json.dumps(report, indent=2))
+    
+    elif args.query == "hypergredient":
+        from hypergredient_framework import HypergredientDatabase, HypergredientOptimizer, HypergredientAnalyzer, FormulationRequest
+        
+        # Initialize hypergredient system
+        database = HypergredientDatabase()
+        optimizer = HypergredientOptimizer(database)
+        analyzer = HypergredientAnalyzer(database)
+        
+        # Generate sample anti-aging formulation
+        request = FormulationRequest(
+            target_concerns=['wrinkles', 'firmness'],
+            secondary_concerns=['dryness'],
+            skin_type='normal',
+            budget=1000.0,
+            preferences=['gentle', 'effective']
+        )
+        
+        result = optimizer.optimize_formulation(request)
+        
+        # Format result for JSON output
+        hypergredient_report = {
+            "formulation_request": {
+                "target_concerns": request.target_concerns,
+                "secondary_concerns": request.secondary_concerns,
+                "skin_type": request.skin_type,
+                "budget": request.budget,
+                "preferences": request.preferences
+            },
+            "optimal_formulation": {
+                "total_cost": result.total_cost,
+                "predicted_efficacy": result.predicted_efficacy,
+                "safety_score": result.safety_score,
+                "synergy_score": result.synergy_score,
+                "stability_months": result.stability_months,
+                "selected_hypergredients": {}
+            },
+            "database_stats": {
+                "total_hypergredients": len(database.hypergredients),
+                "hypergredient_classes": ["H.CT", "H.CS", "H.AO", "H.BR", "H.ML", "H.HY", "H.AI", "H.MB", "H.SE", "H.PD"],
+                "interaction_matrix_size": len(database.interaction_matrix)
+            }
+        }
+        
+        # Add selected ingredients details
+        for class_name, data in result.selected_hypergredients.items():
+            ingredient = data['ingredient']
+            hypergredient_report["optimal_formulation"]["selected_hypergredients"][class_name] = {
+                "name": ingredient.name,
+                "inci_name": ingredient.inci_name,
+                "percentage": data['percentage'],
+                "cost": data['cost'],
+                "efficacy_score": ingredient.efficacy_score,
+                "safety_score": ingredient.safety_score,
+                "reasoning": data['reasoning']
+            }
+        
+        print(json.dumps(hypergredient_report, indent=2))
+    
+    elif args.query == "compatibility":
+        from hypergredient_framework import HypergredientDatabase, HypergredientAnalyzer
+        
+        database = HypergredientDatabase()
+        analyzer = HypergredientAnalyzer(database)
+        
+        # Test ingredient compatibility
+        test_ingredients = ['retinol', 'bakuchiol', 'niacinamide', 'hyaluronic_acid']
+        compatibility_report = analyzer.generate_compatibility_report(test_ingredients)
+        
+        print(json.dumps(compatibility_report, indent=2))
+    
+    elif args.query == "ingredient":
+        from hypergredient_framework import HypergredientDatabase, HypergredientAnalyzer
+        
+        database = HypergredientDatabase()
+        analyzer = HypergredientAnalyzer(database)
+        
+        # Get ingredient profile (use bakuchiol as example)
+        ingredient_id = getattr(args, 'ingredient_id', 'bakuchiol')
+        profile = analyzer.generate_ingredient_profile(ingredient_id)
+        
+        print(json.dumps(profile, indent=2))
 
 
 if __name__ == "__main__":
