@@ -161,6 +161,68 @@ def main():
     except Exception as e:
         print(f"✗ Speed analysis failed: {e}")
     
+    # Hypergredient framework demo
+    print("\n4. Hypergredient Framework Demo:")
+    print("-" * 40)
+    try:
+        from hypergredient_framework import HypergredientDatabase, HypergredientOptimizer, FormulationRequest
+        
+        database = HypergredientDatabase()
+        optimizer = HypergredientOptimizer(database)
+        
+        # Generate optimal anti-aging formulation
+        request = FormulationRequest(
+            target_concerns=['wrinkles', 'firmness'],
+            secondary_concerns=['dryness'],
+            skin_type='normal',
+            budget=800.0,
+            preferences=['gentle', 'effective']
+        )
+        
+        result = optimizer.optimize_formulation(request)
+        
+        print(f"✓ Generated optimal formulation with {len(result.selected_hypergredients)} hypergredients")
+        print(f"  - Total cost: R{result.total_cost:.2f}")
+        print(f"  - Predicted efficacy: {result.predicted_efficacy:.1%}")
+        print(f"  - Safety score: {result.safety_score:.1f}/10")
+        print(f"  - Synergy score: {result.synergy_score:.2f}")
+        print(f"  - Stability: {result.stability_months} months")
+        
+        # Save demo results
+        hypergredient_demo = {
+            "formulation_request": {
+                "target_concerns": request.target_concerns,
+                "secondary_concerns": request.secondary_concerns,
+                "budget": request.budget
+            },
+            "formulation_result": {
+                "total_cost": result.total_cost,
+                "predicted_efficacy": result.predicted_efficacy,
+                "safety_score": result.safety_score,
+                "synergy_score": result.synergy_score,
+                "stability_months": result.stability_months,
+                "selected_ingredients": {
+                    class_name: {
+                        "name": data['ingredient'].name,
+                        "percentage": data['percentage'],
+                        "reasoning": data['reasoning']
+                    }
+                    for class_name, data in result.selected_hypergredients.items()
+                }
+            },
+            "database_info": {
+                "total_hypergredients": len(database.hypergredients),
+                "classes": ["H.CT", "H.CS", "H.AO", "H.BR", "H.ML", "H.HY", "H.AI", "H.MB", "H.SE", "H.PD"]
+            }
+        }
+        
+        with open("hypergredient_framework_demo.json", "w") as f:
+            json.dump(hypergredient_demo, f, indent=2)
+        print(f"  - Detailed report: hypergredient_framework_demo.json")
+        
+    except Exception as e:
+        print(f"✗ Hypergredient framework demo failed: {e}")
+    
     print(f"\n" + "="*60)
     print("ESM-2 Analysis Complete!")
     print("="*60)
@@ -170,10 +232,19 @@ def main():
     print("• Model scaling behavior (8M to 15B parameters)")
     print("• Speed comparison with AlphaFold/RosettaFold")
     print("• Metagenomic-scale analysis feasibility")
+    print("\n🧬 NEW: Hypergredient Framework Architecture:")
+    print("• Multi-objective cosmetic formulation optimization")
+    print("• Real-time ingredient compatibility analysis")
+    print("• Dynamic hypergredient database with 10 classes")
+    print("• Advanced synergy calculation and performance prediction")
+    print("• Cost-effectiveness optimization and safety scoring")
     print("\nQuery these capabilities:")   
     print("  python3 hypergraph_query.py --query structure")
     print("  python3 hypergraph_query.py --query scaling")
     print("  python3 hypergraph_query.py --query speed")
+    print("  python3 hypergraph_query.py --query hypergredient     # Generate optimal formulation")
+    print("  python3 hypergraph_query.py --query compatibility     # Check ingredient compatibility")
+    print("  python3 hypergraph_query.py --query ingredient --ingredient-id tretinoin  # Ingredient profile")
 
 
 def validate_hypergraph(hypergraph):
