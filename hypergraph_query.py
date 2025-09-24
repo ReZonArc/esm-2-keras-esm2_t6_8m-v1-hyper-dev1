@@ -9,6 +9,7 @@ import argparse
 from typing import Dict, List, Set, Any, Optional
 from collections import defaultdict
 from esm2_hypergraph import ESM2Hypergraph, create_esm2_hypergraph
+from esm2_metagraph import ESM2MetaGraph, create_esm2_metagraph
 
 
 class HypergraphQueryEngine:
@@ -184,6 +185,7 @@ def main():
     parser.add_argument("--config", default="config.json", help="Config file path")
     parser.add_argument("--query", choices=[
         "stats", "attention", "params", "bottlenecks", "path", "subgraph", "structure", "scaling", "speed",
+        "metagraph", "tensor_types", "tensor_bundles", "topos", "prime_analysis",
         "hypergredient", "compatibility", "ingredient"
     ], required=True, help="Query type")
     parser.add_argument("--start", help="Start node for path query")
@@ -291,6 +293,117 @@ def main():
         test_lengths = [50, 100, 200, 384, 500, 1000]
         report = analyzer.generate_speed_report(test_lengths)
         print(json.dumps(report, indent=2))
+    
+    # NEW: MetaGraph queries with tensor shape types
+    elif args.query == "metagraph":
+        # Create metagraph with tensor shape types
+        metagraph = create_esm2_metagraph(config)
+        analysis = metagraph.get_topos_analysis()
+        print(json.dumps(analysis, indent=2, default=str))
+    
+    elif args.query == "tensor_types":
+        # Query tensor shape types and prime factorizations
+        metagraph = create_esm2_metagraph(config)
+        type_analysis = metagraph.get_topos_analysis()['tensor_type_analysis']
+        
+        print("Tensor Shape Types with Prime Factorizations:")
+        print("=" * 50)
+        
+        # Show most common types
+        for i, (type_sig, count) in enumerate(type_analysis['most_common_types'][:10], 1):
+            canonical = None
+            for shape_type in metagraph.shape_registry.types.values():
+                if shape_type.type_signature == type_sig:
+                    canonical = shape_type.canonical_form
+                    break
+            print(f"{i:2d}. {type_sig}")
+            print(f"    Mathematical Form: {canonical}")
+            print(f"    Node Count: {count}")
+            print()
+    
+    elif args.query == "tensor_bundles":
+        # Query tensor bundles fibred over shape types
+        metagraph = create_esm2_metagraph(config)
+        clusters = metagraph.get_federated_clusters()
+        
+        print("Tensor Bundles Fibred over Prime Factor Shape Types:")
+        print("=" * 55)
+        
+        for type_sig, cluster in clusters.items():
+            print(f"Bundle: {type_sig}")
+            print(f"  Canonical Form: {cluster['canonical_form']}")
+            print(f"  Topological Class: {cluster['topological_class']}")
+            print(f"  Bundle Dimension: {cluster['bundle_dimension']}")
+            print(f"  Fiber Size: {cluster['node_count']} nodes")
+            if cluster['node_count'] <= 5:
+                print(f"  Nodes: {', '.join(cluster['nodes'])}")
+            else:
+                print(f"  Sample Nodes: {', '.join(list(cluster['nodes'])[:3])}...")
+            print()
+    
+    elif args.query == "topos":
+        # Query topos structure of the metagraph
+        metagraph = create_esm2_metagraph(config)
+        topos = metagraph.topos_structure
+        
+        print("MetaGraph Topos Structure:")
+        print("=" * 30)
+        print(f"Objects (Tensor Bundles): {len(topos['objects'])}")
+        print(f"Morphisms (Typed Edges): {len(topos['morphisms'])}")
+        print()
+        
+        print("Fibration Structure:")
+        fibration = topos['fibration']
+        print(f"  Base Space: {fibration['base_space']}")
+        print(f"  Total Space: {fibration['total_space']}")
+        print(f"  Fiber Types: {len(fibration['fibers'])}")
+        
+        for base_type, bundles in fibration['fibers'].items():
+            print(f"    {base_type} -> {len(bundles)} bundle(s)")
+        print()
+        
+        print("Grothendieck Topology:")
+        topology = topos['grothendieck_topology']
+        print(f"  Covering Families: {len(topology['covers'])}")
+        for cover_type, covers in list(topology['covers'].items())[:3]:
+            print(f"    {cover_type} covered by {len(covers)} types")
+
+    elif args.query == "prime_analysis":
+        # Detailed prime factorization analysis
+        metagraph = create_esm2_metagraph(config)
+        
+        print("Prime Factorization Analysis of ESM-2 Tensor Dimensions:")
+        print("=" * 60)
+        
+        # Analyze the prime structure of all dimensions
+        dimension_analysis = defaultdict(list)
+        for shape_type in metagraph.shape_registry.types.values():
+            for i, (dim, factors) in enumerate(zip(shape_type.dimensions, shape_type.prime_factors)):
+                if dim is not None:
+                    unique_primes = sorted(set(factors))
+                    dimension_analysis[dim].append({
+                        'factors': factors,
+                        'unique_primes': unique_primes,
+                        'signature': f"{dim} = " + " × ".join(map(str, factors)) if factors else "1",
+                        'type_signature': shape_type.type_signature,
+                        'dimension_index': i
+                    })
+        
+        # Show analysis by dimension value
+        for dim in sorted(dimension_analysis.keys()):
+            analyses = dimension_analysis[dim]
+            print(f"Dimension {dim}:")
+            for analysis in analyses[:1]:  # Show first occurrence
+                print(f"  Prime Factorization: {analysis['signature']}")
+                print(f"  Unique Primes: {analysis['unique_primes']}")
+                print(f"  Mathematical Significance: ", end="")
+                if len(analysis['unique_primes']) == 1:
+                    print(f"Power of prime {analysis['unique_primes'][0]}")
+                elif len(analysis['unique_primes']) == 2:
+                    print(f"Product of two prime families")
+                else:
+                    print(f"Composite with {len(analysis['unique_primes'])} distinct primes")
+            print()
     
     elif args.query == "hypergredient":
         from hypergredient_framework import HypergredientDatabase, HypergredientOptimizer, HypergredientAnalyzer, FormulationRequest

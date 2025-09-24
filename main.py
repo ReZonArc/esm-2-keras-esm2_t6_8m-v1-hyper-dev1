@@ -6,6 +6,7 @@ Main script to generate the ESM-2 hypergraph mapping
 import json
 import os
 from esm2_hypergraph import create_esm2_hypergraph
+from esm2_metagraph import create_esm2_metagraph
 from hypergraph_visualizer import create_visualization_report
 
 
@@ -40,6 +41,18 @@ def main():
     
     # Print summary
     print(hypergraph.visualize_summary())
+    
+    # Create the enhanced metagraph with tensor shape types
+    print(f"\n" + "="*60)
+    print("Enhanced MetaGraph with Prime Factorization Tensor Types")
+    print("="*60)
+    
+    metagraph = create_esm2_metagraph(config)
+    print(metagraph.visualize_metagraph_summary())
+    
+    # Export metagraph
+    metagraph.export_metagraph("esm2_metagraph.json")
+    print("✓ MetaGraph with tensor types exported to esm2_metagraph.json")
     
     # Save hypergraph to JSON
     print("Saving hypergraph to JSON...")

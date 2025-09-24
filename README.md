@@ -1,6 +1,31 @@
-# ESM-2 Hypergraph Mapping with Structure Prediction Analysis
+# ESM-2 Hypergraph Mapping with Prime Factorization MetaGraph
 
-This repository contains a complete hypergraph representation of the ESM-2 (Evolutionary Scale Modeling) transformer model variant `esm2_t6_8m-v1`, enhanced with comprehensive structure prediction analysis capabilities based on the landmark ESM-2 paper "Evolutionary-scale prediction of atomic level protein structure with a language model".
+This repository contains a complete hypergraph representation of the ESM-2 (Evolutionary Scale Modeling) transformer model variant `esm2_t6_8m-v1`, enhanced with comprehensive structure prediction analysis capabilities and a revolutionary **prime factorization tensor type system** for creating a typed hypergraph (metagraph) representation.
+
+## 🧮 Prime Factorization Tensor Type System
+
+**NEW:** Convert tensor dimensions to prime factorizations to ensure unique shape expressions and define each topologically distinct tensor dimension shape as a type. This enables a typed hypergraph (metagraph) where federated clustering by type allows for a more compact & elegant mathematical model of the ESM2 transformer architecture as a metagraph topos with tensor bundles fibred over prime factor shape types.
+
+### Mathematical Foundation
+
+Each tensor shape `(B, d₁, d₂, ..., dₙ)` is represented as:
+- **Prime Factorization**: `dᵢ = p₁^a₁ × p₂^a₂ × ... × pₖ^aₖ`
+- **Type Signature**: `B×p₁^a₁*p₂^a₂*...*pₖ^aₖ×...`
+- **Canonical Form**: `B ⊗ (p₁^a₁*p₂^a₂*...*pₖ^aₖ) ⊗ ...`
+
+### Metagraph Topos Structure
+
+- **Objects**: Tensor bundles fibred over prime factor shape types
+- **Morphisms**: Typed hyperedges with compatibility information  
+- **Fibration**: π: E → B where E is tensor bundle space, B is shape type space
+- **Sheaf Structure**: Local sections representing computational data over the base topology
+
+### Key Features
+
+- **Federated Clustering**: Nodes grouped by tensor shape types for compact representation
+- **Tensor Bundle Fibration**: Mathematical structure over prime factor shape types
+- **Type Compatibility Analysis**: Automatic detection of tensor operation compatibility
+- **Topological Classification**: Systematic categorization of tensor dimension structures
 
 ## 🧬 New ESM-2 Structure Prediction Capabilities
 
@@ -301,6 +326,50 @@ for method, speedup_list in speedups.items():
 # Metagenomic scalability
 meta = report["metagenomic_scalability"]
 print(f"617M proteins: {meta['speedup_factor']:.1f}x faster than AlphaFold2")
+```
+
+### ⚛️ Prime Factorization MetaGraph Usage
+
+Create and analyze the enhanced metagraph with tensor shape types:
+
+```python
+from esm2_metagraph import create_esm2_metagraph
+
+# Create metagraph with tensor shape types
+config = {...}  # ESM-2 configuration
+metagraph = create_esm2_metagraph(config)
+
+# View tensor shape types
+analysis = metagraph.get_topos_analysis()
+print(f"Total Shape Types: {analysis['tensor_type_analysis']['total_types']}")
+print(f"Unique Mathematical Structures: {analysis['tensor_type_analysis']['unique_mathematical_structures']}")
+
+# Analyze federated clusters
+clusters = metagraph.get_federated_clusters()
+for type_sig, cluster in clusters.items():
+    print(f"Type: {type_sig}")
+    print(f"  Mathematical Form: {cluster['canonical_form']}")
+    print(f"  Topological Class: {cluster['topological_class']}")
+    print(f"  Nodes: {cluster['node_count']}")
+```
+
+#### Query Tensor Shape Types
+
+```bash
+# View all tensor shape types with prime factorizations
+python3 hypergraph_query.py --query tensor_types
+
+# Analyze tensor bundles fibred over shape types
+python3 hypergraph_query.py --query tensor_bundles
+
+# View topos structure of the metagraph
+python3 hypergraph_query.py --query topos
+
+# Detailed prime factorization analysis
+python3 hypergraph_query.py --query prime_analysis
+
+# Complete metagraph analysis
+python3 hypergraph_query.py --query metagraph
 ```
 
 ### 🧬 Cosmetic Chemistry Framework Usage
