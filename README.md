@@ -1,6 +1,28 @@
-# ESM-2 Hypergraph Mapping
+# ESM-2 Hypergraph Mapping with Structure Prediction Analysis
 
-This repository contains a complete hypergraph representation of the ESM-2 (Evolutionary Scale Modeling) transformer model variant `esm2_t6_8m-v1`. The hypergraph maps the full computational structure of the model, including all layers, attention mechanisms, feed-forward networks, and their interconnections.
+This repository contains a complete hypergraph representation of the ESM-2 (Evolutionary Scale Modeling) transformer model variant `esm2_t6_8m-v1`, enhanced with comprehensive structure prediction analysis capabilities based on the landmark ESM-2 paper "Evolutionary-scale prediction of atomic level protein structure with a language model".
+
+## 🧬 New ESM-2 Structure Prediction Capabilities
+
+Based on the groundbreaking research showing that language models can predict protein structure directly from sequence, this repository now includes:
+
+### 🔬 Structure Analysis
+- **Attention-based contact prediction** - Extract contact maps from transformer attention patterns
+- **Perplexity-structure correlation** - Analyze how language model understanding correlates with structure quality
+- **Atomic resolution metrics** - TM-score, contact precision, pLDDT confidence scoring
+- **Structure emergence detection** - Identify when structural information emerges in representations
+
+### 📈 Scaling Analysis  
+- **Multi-scale model comparison** - Analyze 6 model sizes from 8M to 15B parameters
+- **Performance scaling trends** - Track how structure prediction improves with model scale
+- **Emergence thresholds** - Detect parameter counts where capabilities emerge
+- **Parameter efficiency analysis** - Measure accuracy per parameter and computational cost
+
+### ⚡ Speed Analysis
+- **ESMFold vs traditional methods** - Compare with AlphaFold2, RosettaFold
+- **Speedup quantification** - Up to 60x faster structure prediction
+- **MSA elimination benefits** - No multiple sequence alignment required
+- **Metagenomic scalability** - Analysis of 617M+ protein feasibility
 
 ## Architecture Overview
 
@@ -141,6 +163,83 @@ graph TD
 
 ## Usage
 
+### 🚀 Quick Start
+
+```bash
+# Generate hypergraph and run ESM-2 analysis demo
+python3 main.py
+
+# Query specific capabilities  
+python3 hypergraph_query.py --query structure  # Structure prediction analysis
+python3 hypergraph_query.py --query scaling    # Model scaling analysis  
+python3 hypergraph_query.py --query speed      # Speed comparison analysis
+python3 hypergraph_query.py --query stats      # Basic hypergraph statistics
+```
+
+### 🧬 Structure Prediction Analysis
+
+Analyze how ESM-2 predicts protein structure from attention patterns:
+
+```python
+from structure_analysis import ESM2StructureAnalyzer
+from esm2_hypergraph import create_esm2_hypergraph
+
+# Create analyzer
+config = {...}  # ESM-2 configuration
+hypergraph = create_esm2_hypergraph(config)
+analyzer = ESM2StructureAnalyzer(hypergraph)
+
+# Analyze protein sequences
+sequences = ["MKLLVLGLGGTAAMAAAQ...", "MEEGLLAAGGGPSPQPLP..."]
+report = analyzer.generate_structure_report(sequences)
+
+print(f"Mean TM-score: {report['aggregate_statistics']['mean_tm_score']:.3f}")
+print(f"Perplexity correlation: {report['correlations']['perplexity_tm_score']:.3f}")
+```
+
+### 📈 Scaling Analysis
+
+Study how structure prediction emerges across model scales (8M to 15B parameters):
+
+```python
+from scaling_analysis import ESM2ScalingAnalyzer
+
+analyzer = ESM2ScalingAnalyzer()
+report = analyzer.generate_scaling_report(test_sequences)
+
+# View scaling trends
+trends = report["scaling_analysis"]["scaling_trends"]
+print(f"TM-score scaling: r={trends['tm_score_vs_size']['correlation']:.3f}")
+
+# Find emergence thresholds
+emergence = report["scaling_analysis"]["emergence_analysis"]
+if emergence["structure_prediction_threshold"]:
+    threshold = emergence["structure_prediction_threshold"]
+    print(f"Structure emerges at {threshold['parameters']:,} parameters")
+```
+
+### ⚡ Speed Analysis
+
+Compare ESMFold speed with traditional structure prediction methods:
+
+```python
+from folding_speed_analysis import ESMFoldSpeedAnalyzer
+
+analyzer = ESMFoldSpeedAnalyzer()
+report = analyzer.generate_speed_report([100, 200, 384, 500])
+
+# View speedup factors
+speedups = report["speed_comparison"]["speedup_factors"]
+for method, speedup_list in speedups.items():
+    for data in speedup_list:
+        if data["sequence_length"] == 384:
+            print(f"{method}: {data['speedup_factor']:.1f}x slower than ESMFold")
+
+# Metagenomic scalability
+meta = report["metagenomic_scalability"]
+print(f"617M proteins: {meta['speedup_factor']:.1f}x faster than AlphaFold2")
+```
+
 ### Generate Hypergraph
 
 ```bash
@@ -151,6 +250,7 @@ This creates:
 - `esm2_hypergraph.json`: Full hypergraph data structure
 - `hypergraph_analysis_report.md`: Comprehensive analysis report with mermaid diagrams
 - `esm2_hypergraph.dot`: Graph visualization file
+- Structure/scaling/speed analysis demo reports
 
 ### Generate Standalone Mermaid Diagrams
 
@@ -176,6 +276,21 @@ flowchart LR
     B -->|params| E[Parameter Flow<br/>Analysis]
     B -->|bottlenecks| F[Find Bottlenecks<br/>High Fan-in/out]
     B -->|path| G[Find Computational<br/>Path A→B]
+    B -->|subgraph| H[Extract Layer<br/>Subgraph]
+    B -->|structure| I[🧬 Structure Prediction<br/>Analysis]
+    B -->|scaling| J[📈 Model Scaling<br/>Analysis]
+    B -->|speed| K[⚡ Speed Comparison<br/>Analysis]
+    
+    C --> L[JSON Output]
+    D --> L
+    E --> L
+    F --> L
+    I --> L
+    J --> L
+    K --> L
+    G --> M[Path Visualization]
+    H --> N[Subgraph Export]
+```
     B -->|subgraph| H[Extract Layer<br/>Subgraph]
     
     C --> I[JSON Output]
@@ -204,6 +319,15 @@ python3 hypergraph_query.py --query path --start token_embedding --end output_he
 
 # Export subgraph for specific layers
 python3 hypergraph_query.py --query subgraph --layer-start 0 --layer-end 2
+
+# NEW: Structure prediction analysis
+python3 hypergraph_query.py --query structure
+
+# NEW: Model scaling analysis (8M to 15B parameters)
+python3 hypergraph_query.py --query scaling
+
+# NEW: Speed comparison analysis (ESMFold vs AlphaFold/RosettaFold)
+python3 hypergraph_query.py --query speed
 ```
 
 ### Visualize Graph

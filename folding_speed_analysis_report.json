@@ -1,0 +1,536 @@
+{
+  "summary": {
+    "title": "ESMFold Speed Analysis Report",
+    "methods_compared": [
+      "esmfold",
+      "alphafold2",
+      "alphafold2_fast",
+      "rosettafold",
+      "alphafold2_no_msa"
+    ],
+    "sequence_lengths_tested": [
+      50,
+      100,
+      200,
+      384,
+      500,
+      1000
+    ],
+    "key_findings": [
+      "ESMFold achieves up to 2500.7x speedup over rosettafold",
+      "ESMFold eliminates MSA search time, providing immediate predictions",
+      "ESMFold shows highest computational efficiency at 3.000 TM-score per minute"
+    ]
+  },
+  "speed_comparison": {
+    "method_timings": {
+      "esmfold": [
+        {
+          "method_name": "esmfold",
+          "sequence_length": 50,
+          "prediction_time": 0.24074978298611113,
+          "msa_search_time": 0.0,
+          "gpu_memory_usage": 1.0416666666666667,
+          "requires_msa": false,
+          "accuracy_tm_score": 0.71
+        },
+        {
+          "method_name": "esmfold",
+          "sequence_length": 100,
+          "prediction_time": 0.9629991319444445,
+          "msa_search_time": 0.0,
+          "gpu_memory_usage": 2.0833333333333335,
+          "requires_msa": false,
+          "accuracy_tm_score": 0.71
+        },
+        {
+          "method_name": "esmfold",
+          "sequence_length": 200,
+          "prediction_time": 3.851996527777778,
+          "msa_search_time": 0.0,
+          "gpu_memory_usage": 4.166666666666667,
+          "requires_msa": false,
+          "accuracy_tm_score": 0.71
+        },
+        {
+          "method_name": "esmfold",
+          "sequence_length": 384,
+          "prediction_time": 14.2,
+          "msa_search_time": 0.0,
+          "gpu_memory_usage": 8.0,
+          "requires_msa": false,
+          "accuracy_tm_score": 0.71
+        },
+        {
+          "method_name": "esmfold",
+          "sequence_length": 500,
+          "prediction_time": 24.074978298611107,
+          "msa_search_time": 0.0,
+          "gpu_memory_usage": 10.416666666666666,
+          "requires_msa": false,
+          "accuracy_tm_score": 0.71
+        },
+        {
+          "method_name": "esmfold",
+          "sequence_length": 1000,
+          "prediction_time": 96.29991319444443,
+          "msa_search_time": 0.0,
+          "gpu_memory_usage": 20.833333333333332,
+          "requires_msa": false,
+          "accuracy_tm_score": 0.71
+        }
+      ],
+      "alphafold2": [
+        {
+          "method_name": "alphafold2",
+          "sequence_length": 50,
+          "prediction_time": 601.4411078559028,
+          "msa_search_time": 150.0,
+          "gpu_memory_usage": 2.0833333333333335,
+          "requires_msa": true,
+          "accuracy_tm_score": 0.88
+        },
+        {
+          "method_name": "alphafold2",
+          "sequence_length": 100,
+          "prediction_time": 305.7644314236111,
+          "msa_search_time": 300.0,
+          "gpu_memory_usage": 4.166666666666667,
+          "requires_msa": true,
+          "accuracy_tm_score": 0.88
+        },
+        {
+          "method_name": "alphafold2",
+          "sequence_length": 200,
+          "prediction_time": 623.0577256944445,
+          "msa_search_time": 600.0,
+          "gpu_memory_usage": 8.333333333333334,
+          "requires_msa": true,
+          "accuracy_tm_score": 0.88
+        },
+        {
+          "method_name": "alphafold2",
+          "sequence_length": 384,
+          "prediction_time": 1237.0,
+          "msa_search_time": 1152.0,
+          "gpu_memory_usage": 16.0,
+          "requires_msa": true,
+          "accuracy_tm_score": 0.88
+        },
+        {
+          "method_name": "alphafold2",
+          "sequence_length": 500,
+          "prediction_time": 1344.1107855902778,
+          "msa_search_time": 1200.0,
+          "gpu_memory_usage": 20.833333333333332,
+          "requires_msa": true,
+          "accuracy_tm_score": 0.88
+        },
+        {
+          "method_name": "alphafold2",
+          "sequence_length": 1000,
+          "prediction_time": 1776.4431423611109,
+          "msa_search_time": 1200.0,
+          "gpu_memory_usage": 41.666666666666664,
+          "requires_msa": true,
+          "accuracy_tm_score": 0.88
+        }
+      ],
+      "alphafold2_fast": [
+        {
+          "method_name": "alphafold2_fast",
+          "sequence_length": 50,
+          "prediction_time": 61.017252604166664,
+          "msa_search_time": 15.0,
+          "gpu_memory_usage": 2.0833333333333335,
+          "requires_msa": true,
+          "accuracy_tm_score": 0.84
+        },
+        {
+          "method_name": "alphafold2_fast",
+          "sequence_length": 100,
+          "prediction_time": 34.06901041666667,
+          "msa_search_time": 30.0,
+          "gpu_memory_usage": 4.166666666666667,
+          "requires_msa": true,
+          "accuracy_tm_score": 0.84
+        },
+        {
+          "method_name": "alphafold2_fast",
+          "sequence_length": 200,
+          "prediction_time": 76.27604166666667,
+          "msa_search_time": 60.0,
+          "gpu_memory_usage": 8.333333333333334,
+          "requires_msa": true,
+          "accuracy_tm_score": 0.84
+        },
+        {
+          "method_name": "alphafold2_fast",
+          "sequence_length": 384,
+          "prediction_time": 175.2,
+          "msa_search_time": 115.19999999999999,
+          "gpu_memory_usage": 16.0,
+          "requires_msa": true,
+          "accuracy_tm_score": 0.84
+        },
+        {
+          "method_name": "alphafold2_fast",
+          "sequence_length": 500,
+          "prediction_time": 221.72526041666666,
+          "msa_search_time": 120.0,
+          "gpu_memory_usage": 20.833333333333332,
+          "requires_msa": true,
+          "accuracy_tm_score": 0.84
+        },
+        {
+          "method_name": "alphafold2_fast",
+          "sequence_length": 1000,
+          "prediction_time": 526.9010416666666,
+          "msa_search_time": 120.0,
+          "gpu_memory_usage": 41.666666666666664,
+          "requires_msa": true,
+          "accuracy_tm_score": 0.84
+        }
+      ],
+      "rosettafold": [
+        {
+          "method_name": "rosettafold",
+          "sequence_length": 50,
+          "prediction_time": 602.0345052083334,
+          "msa_search_time": 150.0,
+          "gpu_memory_usage": 1.5625,
+          "requires_msa": true,
+          "accuracy_tm_score": 0.82
+        },
+        {
+          "method_name": "rosettafold",
+          "sequence_length": 100,
+          "prediction_time": 308.1380208333333,
+          "msa_search_time": 300.0,
+          "gpu_memory_usage": 3.125,
+          "requires_msa": true,
+          "accuracy_tm_score": 0.82
+        },
+        {
+          "method_name": "rosettafold",
+          "sequence_length": 200,
+          "prediction_time": 632.5520833333334,
+          "msa_search_time": 600.0,
+          "gpu_memory_usage": 6.25,
+          "requires_msa": true,
+          "accuracy_tm_score": 0.82
+        },
+        {
+          "method_name": "rosettafold",
+          "sequence_length": 384,
+          "prediction_time": 1272.0,
+          "msa_search_time": 1152.0,
+          "gpu_memory_usage": 12.0,
+          "requires_msa": true,
+          "accuracy_tm_score": 0.82
+        },
+        {
+          "method_name": "rosettafold",
+          "sequence_length": 500,
+          "prediction_time": 1403.4505208333333,
+          "msa_search_time": 1200.0,
+          "gpu_memory_usage": 15.625,
+          "requires_msa": true,
+          "accuracy_tm_score": 0.82
+        },
+        {
+          "method_name": "rosettafold",
+          "sequence_length": 1000,
+          "prediction_time": 2013.8020833333333,
+          "msa_search_time": 1200.0,
+          "gpu_memory_usage": 31.25,
+          "requires_msa": true,
+          "accuracy_tm_score": 0.82
+        }
+      ],
+      "alphafold2_no_msa": [
+        {
+          "method_name": "alphafold2_no_msa",
+          "sequence_length": 50,
+          "prediction_time": 5.086263020833334,
+          "msa_search_time": 0.0,
+          "gpu_memory_usage": 1.5625,
+          "requires_msa": false,
+          "accuracy_tm_score": 0.65
+        },
+        {
+          "method_name": "alphafold2_no_msa",
+          "sequence_length": 100,
+          "prediction_time": 20.345052083333336,
+          "msa_search_time": 0.0,
+          "gpu_memory_usage": 3.125,
+          "requires_msa": false,
+          "accuracy_tm_score": 0.65
+        },
+        {
+          "method_name": "alphafold2_no_msa",
+          "sequence_length": 200,
+          "prediction_time": 81.38020833333334,
+          "msa_search_time": 0.0,
+          "gpu_memory_usage": 6.25,
+          "requires_msa": false,
+          "accuracy_tm_score": 0.65
+        },
+        {
+          "method_name": "alphafold2_no_msa",
+          "sequence_length": 384,
+          "prediction_time": 300.0,
+          "msa_search_time": 0.0,
+          "gpu_memory_usage": 12.0,
+          "requires_msa": false,
+          "accuracy_tm_score": 0.65
+        },
+        {
+          "method_name": "alphafold2_no_msa",
+          "sequence_length": 500,
+          "prediction_time": 508.62630208333326,
+          "msa_search_time": 0.0,
+          "gpu_memory_usage": 15.625,
+          "requires_msa": false,
+          "accuracy_tm_score": 0.65
+        },
+        {
+          "method_name": "alphafold2_no_msa",
+          "sequence_length": 1000,
+          "prediction_time": 2034.505208333333,
+          "msa_search_time": 0.0,
+          "gpu_memory_usage": 31.25,
+          "requires_msa": false,
+          "accuracy_tm_score": 0.65
+        }
+      ]
+    },
+    "speedup_factors": {
+      "alphafold2": [
+        {
+          "sequence_length": 50,
+          "speedup_factor": 2498.2
+        },
+        {
+          "sequence_length": 100,
+          "speedup_factor": 317.51267605633797
+        },
+        {
+          "sequence_length": 200,
+          "speedup_factor": 161.74929577464786
+        },
+        {
+          "sequence_length": 384,
+          "speedup_factor": 87.11267605633803
+        },
+        {
+          "sequence_length": 500,
+          "speedup_factor": 55.830197183098605
+        },
+        {
+          "sequence_length": 1000,
+          "speedup_factor": 18.44698591549296
+        }
+      ],
+      "alphafold2_fast": [
+        {
+          "sequence_length": 50,
+          "speedup_factor": 253.44676056338025
+        },
+        {
+          "sequence_length": 100,
+          "speedup_factor": 35.37802816901409
+        },
+        {
+          "sequence_length": 200,
+          "speedup_factor": 19.80169014084507
+        },
+        {
+          "sequence_length": 384,
+          "speedup_factor": 12.338028169014084
+        },
+        {
+          "sequence_length": 500,
+          "speedup_factor": 9.209780281690142
+        },
+        {
+          "sequence_length": 1000,
+          "speedup_factor": 5.471459154929578
+        }
+      ],
+      "rosettafold": [
+        {
+          "sequence_length": 50,
+          "speedup_factor": 2500.6647887323943
+        },
+        {
+          "sequence_length": 100,
+          "speedup_factor": 319.97746478873233
+        },
+        {
+          "sequence_length": 200,
+          "speedup_factor": 164.21408450704226
+        },
+        {
+          "sequence_length": 384,
+          "speedup_factor": 89.5774647887324
+        },
+        {
+          "sequence_length": 500,
+          "speedup_factor": 58.294985915492965
+        },
+        {
+          "sequence_length": 1000,
+          "speedup_factor": 20.911774647887327
+        }
+      ],
+      "alphafold2_no_msa": [
+        {
+          "sequence_length": 50,
+          "speedup_factor": 21.126760563380284
+        },
+        {
+          "sequence_length": 100,
+          "speedup_factor": 21.126760563380284
+        },
+        {
+          "sequence_length": 200,
+          "speedup_factor": 21.126760563380284
+        },
+        {
+          "sequence_length": 384,
+          "speedup_factor": 21.126760563380284
+        },
+        {
+          "sequence_length": 500,
+          "speedup_factor": 21.126760563380284
+        },
+        {
+          "sequence_length": 1000,
+          "speedup_factor": 21.126760563380284
+        }
+      ]
+    },
+    "computational_efficiency": {
+      "esmfold": 3.0,
+      "alphafold2": 0.04268391269199676,
+      "alphafold2_fast": 0.2876712328767123,
+      "rosettafold": 0.038679245283018866,
+      "alphafold2_no_msa": 0.13
+    }
+  },
+  "metagenomic_scalability": {
+    "dataset_size": {
+      "num_proteins": 617000000,
+      "avg_sequence_length": 300
+    },
+    "esmfold_requirements": {
+      "time_per_protein_seconds": 8.6669921875,
+      "total_time_hours": 1485426.1610243055,
+      "total_time_days": 61892.75670934607,
+      "gpu_hours_required": 1485426.1610243055
+    },
+    "alphafold2_requirements": {
+      "time_per_protein_seconds": 951.8798828125,
+      "total_time_hours": 163141635.47092015,
+      "total_time_days": 6797568.144621672,
+      "gpu_hours_required": 163141635.47092015
+    },
+    "speedup_factor": 109.82816901408451,
+    "cluster_requirements": {
+      "target_completion_days": 14,
+      "required_parallel_gpus": 4420,
+      "paper_reported_gpus": 2000,
+      "feasibility": "challenging"
+    }
+  },
+  "accuracy_speed_tradeoffs": {
+    "pareto_analysis": {
+      "esmfold": {
+        "accuracy_tm_score": 0.71,
+        "time_seconds": 14.2,
+        "accuracy_per_minute": 3.0,
+        "time_per_tm_point": 20.0,
+        "requires_msa": false
+      },
+      "alphafold2": {
+        "accuracy_tm_score": 0.88,
+        "time_seconds": 1237.0,
+        "accuracy_per_minute": 0.04268391269199676,
+        "time_per_tm_point": 1405.6818181818182,
+        "requires_msa": true
+      },
+      "alphafold2_fast": {
+        "accuracy_tm_score": 0.84,
+        "time_seconds": 175.2,
+        "accuracy_per_minute": 0.2876712328767123,
+        "time_per_tm_point": 208.57142857142856,
+        "requires_msa": true
+      },
+      "rosettafold": {
+        "accuracy_tm_score": 0.82,
+        "time_seconds": 1272.0,
+        "accuracy_per_minute": 0.038679245283018866,
+        "time_per_tm_point": 1551.219512195122,
+        "requires_msa": true
+      },
+      "alphafold2_no_msa": {
+        "accuracy_tm_score": 0.65,
+        "time_seconds": 300.0,
+        "accuracy_per_minute": 0.13,
+        "time_per_tm_point": 461.53846153846155,
+        "requires_msa": false
+      }
+    },
+    "efficiency_ranking": [
+      {
+        "method": "esmfold",
+        "efficiency": 3.0
+      },
+      {
+        "method": "alphafold2_fast",
+        "efficiency": 0.2876712328767123
+      },
+      {
+        "method": "alphafold2_no_msa",
+        "efficiency": 0.13
+      },
+      {
+        "method": "alphafold2",
+        "efficiency": 0.04268391269199676
+      },
+      {
+        "method": "rosettafold",
+        "efficiency": 0.038679245283018866
+      }
+    ],
+    "recommendations": {
+      "high_throughput": "esmfold",
+      "highest_accuracy": "alphafold2",
+      "balanced": "alphafold2_fast",
+      "novel_proteins": "esmfold"
+    }
+  },
+  "scalability_analysis": {
+    "esmfold": {
+      "scaling_exponent": 2.0000000000000155,
+      "complexity_class": "quadratic"
+    },
+    "alphafold2": {
+      "scaling_exponent": 0.5050879521691826,
+      "complexity_class": "linear"
+    },
+    "alphafold2_fast": {
+      "scaling_exponent": 0.8231963198392884,
+      "complexity_class": "linear"
+    },
+    "rosettafold": {
+      "scaling_exponent": 0.5401828431296014,
+      "complexity_class": "linear"
+    },
+    "alphafold2_no_msa": {
+      "scaling_exponent": 2.0000000000000155,
+      "complexity_class": "quadratic"
+    }
+  }
+}

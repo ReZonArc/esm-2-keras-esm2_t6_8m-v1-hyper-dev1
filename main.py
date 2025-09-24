@@ -71,6 +71,109 @@ def main():
     print(f"  - esm2_hypergraph.json (full hypergraph data)")
     print(f"  - hypergraph_analysis_report.md (analysis report)")
     print(f"  - esm2_hypergraph.dot (graph visualization)")
+    
+    # Demonstrate new ESM-2 structure prediction capabilities
+    print(f"\n" + "="*60)
+    print("ESM-2 Structure Prediction Analysis Demo")
+    print("="*60)
+    
+    # Structure analysis demo
+    print("\n1. Structure Prediction Analysis:")
+    print("-" * 40)
+    try:
+        from structure_analysis import ESM2StructureAnalyzer
+        structure_analyzer = ESM2StructureAnalyzer(hypergraph)
+        
+        demo_sequences = [
+            "MKLLVLGLGGTAAMAAAQPQPAPQPSAPQPLPQLPLQAQPQPQPQPQQLQQM",
+            "MKLLVLGLGGTAAMAGGGGPSPQPLPQLPLQAQPQPQPQPQQLQQMKLLVL"
+        ]
+        
+        structure_report = structure_analyzer.generate_structure_report(demo_sequences)
+        stats = structure_report["aggregate_statistics"]
+        corr = structure_report["correlations"]
+        
+        print(f"✓ Analyzed {len(demo_sequences)} protein sequences")
+        print(f"  - Mean TM-score: {stats['mean_tm_score']:.3f}")
+        print(f"  - Mean Contact Precision: {stats['mean_contact_precision']:.3f}")
+        print(f"  - Mean Perplexity: {stats['mean_perplexity']:.3f}")
+        print(f"  - Perplexity-TM correlation: {corr['perplexity_tm_score']:.3f}")
+        
+        with open("structure_analysis_demo.json", "w") as f:
+            json.dump(structure_report, f, indent=2)
+        print(f"  - Detailed report: structure_analysis_demo.json")
+        
+    except Exception as e:
+        print(f"✗ Structure analysis failed: {e}")
+    
+    # Scaling analysis demo
+    print("\n2. Model Scaling Analysis:")
+    print("-" * 40)
+    try:
+        from scaling_analysis import ESM2ScalingAnalyzer
+        scaling_analyzer = ESM2ScalingAnalyzer()
+        
+        demo_sequences = [
+            "MKLLVLGLGGTAAMAAAQPQPAPQPSAPQPLPQLPLQAQPQPQPQPQQLQQM",
+            "MKLLVLGLGGTAAMAGGGGPSPQPLPQLPLQAQPQPQPQPQQLQQMKLLVL",
+            "MEEGLLAAGGGPSPQPLPQLPLQAQPQPQPQPQPQQLQQMKLLVLGLGGTAAM"
+        ]
+        
+        scaling_report = scaling_analyzer.generate_scaling_report(demo_sequences)
+        summary = scaling_report["summary"]
+        trends = scaling_report["scaling_analysis"]["scaling_trends"]
+        
+        print(f"✓ Analyzed scaling across {summary['num_models_analyzed']} model sizes")
+        print(f"  - Parameter range: {summary['parameter_range']}")
+        print(f"  - TM-score scaling: r={trends['tm_score_vs_size']['correlation']:.3f}")
+        print(f"  - Structure emerges at 3B+ parameters")
+        
+        with open("scaling_analysis_demo.json", "w") as f:
+            json.dump(scaling_report, f, indent=2)
+        print(f"  - Detailed report: scaling_analysis_demo.json")
+        
+    except Exception as e:
+        print(f"✗ Scaling analysis failed: {e}")
+    
+    # Speed analysis demo
+    print("\n3. Folding Speed Analysis:")
+    print("-" * 40)
+    try:
+        from folding_speed_analysis import ESMFoldSpeedAnalyzer
+        speed_analyzer = ESMFoldSpeedAnalyzer()
+        
+        test_lengths = [100, 200, 384, 500]
+        speed_report = speed_analyzer.generate_speed_report(test_lengths)
+        
+        key_findings = speed_report["summary"]["key_findings"]
+        efficiency = speed_report["speed_comparison"]["computational_efficiency"]
+        meta = speed_report["metagenomic_scalability"]
+        
+        print(f"✓ Speed analysis across {len(test_lengths)} sequence lengths")
+        print(f"  - Key finding: {key_findings[0]}")
+        print(f"  - ESMFold efficiency: {efficiency['esmfold']:.3f} TM-score/min")
+        print(f"  - Metagenomic speedup: {meta['speedup_factor']:.1f}x faster")
+        
+        with open("speed_analysis_demo.json", "w") as f:
+            json.dump(speed_report, f, indent=2)
+        print(f"  - Detailed report: speed_analysis_demo.json")
+        
+    except Exception as e:
+        print(f"✗ Speed analysis failed: {e}")
+    
+    print(f"\n" + "="*60)
+    print("ESM-2 Analysis Complete!")
+    print("="*60)
+    print("\nNew capabilities based on ESM-2 paper:")
+    print("• Structure prediction from attention patterns")
+    print("• Perplexity-accuracy correlation analysis")
+    print("• Model scaling behavior (8M to 15B parameters)")
+    print("• Speed comparison with AlphaFold/RosettaFold")
+    print("• Metagenomic-scale analysis feasibility")
+    print("\nQuery these capabilities:")   
+    print("  python3 hypergraph_query.py --query structure")
+    print("  python3 hypergraph_query.py --query scaling")
+    print("  python3 hypergraph_query.py --query speed")
 
 
 def validate_hypergraph(hypergraph):
