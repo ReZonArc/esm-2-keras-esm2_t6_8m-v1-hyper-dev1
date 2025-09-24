@@ -15,7 +15,18 @@ import random
 from typing import Dict, List, Tuple, Any, Optional, Set
 from dataclasses import dataclass, field
 from enum import Enum
-from cosmetic_intro_example import AtomType, CosmeticIngredient, CosmeticFormulation, CosmeticChemistryFramework
+# Handle imports properly for both direct execution and module imports
+try:
+    from cosmetic_intro_example import AtomType, CosmeticIngredient, CosmeticFormulation, CosmeticChemistryFramework
+except ImportError:
+    import sys
+    import os
+    sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+    import cosmetic_intro_example as intro
+    AtomType = intro.AtomType
+    CosmeticIngredient = intro.CosmeticIngredient
+    CosmeticFormulation = intro.CosmeticFormulation
+    CosmeticChemistryFramework = intro.CosmeticChemistryFramework
 
 
 @dataclass
