@@ -1,0 +1,64 @@
+{
+  "summary": {
+    "num_sequences": 2,
+    "model_config": {
+      "name": "esm_backbone",
+      "trainable": true,
+      "vocabulary_size": 33,
+      "num_layers": 6,
+      "num_heads": 20,
+      "hidden_dim": 320,
+      "intermediate_dim": 1280,
+      "dropout": 0,
+      "max_wavelength": 10000,
+      "use_bias": true,
+      "activation": "gelu",
+      "layer_norm_eps": 1e-05,
+      "use_pre_layer_norm": false,
+      "position_embedding_type": "rotary",
+      "max_sequence_length": 1026,
+      "pad_token_id": 1
+    },
+    "analysis_timestamp": "2024-01-01T00:00:00Z"
+  },
+  "individual_predictions": [
+    {
+      "sequence_id": 0,
+      "sequence_length": 52,
+      "metrics": {
+        "tm_score": 0.4357105371858704,
+        "gdt_score": 0.34856842974869634,
+        "contact_precision_l": 0.681010209410484,
+        "contact_precision_l2": 0.6129091884694355,
+        "contact_precision_l5": 0.5448081675283872,
+        "perplexity": 5.189897905895161,
+        "plddt_score": 95.0
+      }
+    },
+    {
+      "sequence_id": 1,
+      "sequence_length": 51,
+      "metrics": {
+        "tm_score": 0.33364073630655877,
+        "gdt_score": 0.266912589045247,
+        "contact_precision_l": 0.5572239968278477,
+        "contact_precision_l2": 0.5015015971450629,
+        "contact_precision_l5": 0.44577919746227823,
+        "perplexity": 6.427760031721522,
+        "plddt_score": 95.0
+      }
+    }
+  ],
+  "aggregate_statistics": {
+    "mean_tm_score": 0.3846756367462146,
+    "mean_contact_precision": 0.6191171031191658,
+    "mean_perplexity": 5.808828968808342,
+    "mean_plddt": 95.0
+  },
+  "scaling_analysis": {},
+  "correlations": {
+    "perplexity_tm_score": -1.0000000000000173,
+    "perplexity_contact_precision": -0.9999999999999973,
+    "perplexity_plddt": 0.0
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "summary": {
+    "num_sequences": 3,
+    "model_config": {
+      "name": "esm_backbone",
+      "trainable": true,
+      "vocabulary_size": 33,
+      "num_layers": 6,
+      "num_heads": 20,
+      "hidden_dim": 320,
+      "intermediate_dim": 1280,
+      "dropout": 0,
+      "max_wavelength": 10000,
+      "use_bias": true,
+      "activation": "gelu",
+      "layer_norm_eps": 1e-05,
+      "use_pre_layer_norm": false,
+      "position_embedding_type": "rotary",
+      "max_sequence_length": 1026,
+      "pad_token_id": 1
+    },
+    "analysis_timestamp": "2024-01-01T00:00:00Z"
+  },
+  "individual_predictions": [
+    {
+      "sequence_id": 0,
+      "sequence_length": 52,
+      "metrics": {
+        "tm_score": 0.16038655466935356,
+        "gdt_score": 0.12830924373548286,
+        "contact_precision_l": 0.5200383982152537,
+        "contact_precision_l2": 0.4680345583937283,
+        "contact_precision_l5": 0.416030718572203,
+        "perplexity": 6.799616017847463,
+        "plddt_score": 95.0
+      }
+    },
+    {
+      "sequence_id": 1,
+      "sequence_length": 51,
+      "metrics": {
+        "tm_score": 0.4278452694079289,
+        "gdt_score": 0.34227621552634313,
+        "contact_precision_l": 0.6195217852864275,
+        "contact_precision_l2": 0.5575696067577848,
+        "contact_precision_l5": 0.49561742822914207,
+        "perplexity": 5.804782147135724,
+        "plddt_score": 95.0
+      }
+    },
+    {
+      "sequence_id": 2,
+      "sequence_length": 51,
+      "metrics": {
+        "tm_score": 0.4292998119632456,
+        "gdt_score": 0.34343984957059653,
+        "contact_precision_l": 0.6493627531396974,
+        "contact_precision_l2": 0.5844264778257277,
+        "contact_precision_l5": 0.5194902025117579,
+        "perplexity": 5.5063724686030255,
+        "plddt_score": 95.0
+      }
+    }
+  ],
+  "aggregate_statistics": {
+    "mean_tm_score": 0.3391772120135093,
+    "mean_contact_precision": 0.5963076455471262,
+    "mean_perplexity": 6.0369235445287375,
+    "mean_plddt": 95.0
+  },
+  "scaling_analysis": {},
+  "correlations": {
+    "perplexity_tm_score": -0.976447028604869,
+    "perplexity_contact_precision": -1.0000000000000058,
+    "perplexity_plddt": 0.0
+  }
+}

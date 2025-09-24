@@ -183,7 +183,7 @@ def main():
     parser = argparse.ArgumentParser(description="Query ESM-2 Hypergraph")
     parser.add_argument("--config", default="config.json", help="Config file path")
     parser.add_argument("--query", choices=[
-        "stats", "attention", "params", "bottlenecks", "path", "subgraph"
+        "stats", "attention", "params", "bottlenecks", "path", "subgraph", "structure", "scaling", "speed"
     ], required=True, help="Query type")
     parser.add_argument("--start", help="Start node for path query")
     parser.add_argument("--end", help="End node for path query")
@@ -253,6 +253,42 @@ def main():
         
         subgraph = query_engine.export_subgraph(args.layer_start, args.layer_end)
         print(json.dumps(subgraph, indent=2))
+    
+    elif args.query == "structure":
+        from structure_analysis import ESM2StructureAnalyzer
+        analyzer = ESM2StructureAnalyzer(hypergraph)
+        
+        # Example sequences for demonstration
+        test_sequences = [
+            "MKLLVLGLGGTAAMAAAQPQPAPQPSAPQPLPQLPLQAQPQPQPQPQQLQQM",
+            "MKLLVLGLGGTAAMAGGGGPSPQPLPQLPLQAQPQPQPQPQQLQQMKLLVL"
+        ]
+        
+        report = analyzer.generate_structure_report(test_sequences)
+        print(json.dumps(report, indent=2))
+    
+    elif args.query == "scaling":
+        from scaling_analysis import ESM2ScalingAnalyzer
+        analyzer = ESM2ScalingAnalyzer()
+        
+        # Example sequences for demonstration
+        test_sequences = [
+            "MKLLVLGLGGTAAMAAAQPQPAPQPSAPQPLPQLPLQAQPQPQPQPQQLQQM",
+            "MKLLVLGLGGTAAMAGGGGPSPQPLPQLPLQAQPQPQPQPQQLQQMKLLVL",
+            "MEEGLLAAGGGPSPQPLPQLPLQAQPQPQPQPQQLQQMKLLVLGLGGTAAM"
+        ]
+        
+        report = analyzer.generate_scaling_report(test_sequences)
+        print(json.dumps(report, indent=2))
+    
+    elif args.query == "speed":
+        from folding_speed_analysis import ESMFoldSpeedAnalyzer
+        analyzer = ESMFoldSpeedAnalyzer()
+        
+        # Test with common sequence lengths
+        test_lengths = [50, 100, 200, 384, 500, 1000]
+        report = analyzer.generate_speed_report(test_lengths)
+        print(json.dumps(report, indent=2))
 
 
 if __name__ == "__main__":
