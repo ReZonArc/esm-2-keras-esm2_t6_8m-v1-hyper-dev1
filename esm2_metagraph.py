@@ -12,7 +12,7 @@ import json
 from esm2_hypergraph import ESM2Hypergraph, HyperNode, HyperEdge
 from tensor_shape_types import (
     TensorShapeType, TensorShapeTypeRegistry, create_tensor_shape_type,
-    analyze_tensor_type_distribution
+    analyze_tensor_type_distribution, OperatorType, ComputationalMode
 )
 
 
@@ -24,6 +24,13 @@ class TensorBundle:
     bundle_dimension: int  # Rank of tensors in this bundle
     topological_class: str  # Topological classification
     
+    # New optimization fields
+    computational_mode: ComputationalMode  # Spatial concurrent vs temporal asymmetric
+    operator_type: OperatorType  # Prime index grammar vs product grammar
+    node_values: List[int]  # Prime values for fractal nodes
+    edge_weights: List[int]  # Power weights for fractal edges
+    reducibility_pattern: str  # Pattern of reducible/irreducible structure
+    
     
 @dataclass 
 class TypedHyperEdge(HyperEdge):
@@ -32,6 +39,12 @@ class TypedHyperEdge(HyperEdge):
     output_types: List[str]  # Output tensor type signatures
     type_transformation: str  # Description of type transformation
     compatibility_score: float  # Measure of type compatibility
+    
+    # New optimization fields
+    computational_complexity: str  # P=NP optimization class
+    spatial_concurrent_nodes: List[str]  # Nodes in spatial concurrent mode
+    temporal_sequence_nodes: List[str]  # Nodes in temporal asymmetric mode
+    fractal_depth: int  # Depth in fractal neural network structure
 
 
 class ESM2MetaGraph(ESM2Hypergraph):
@@ -105,12 +118,43 @@ class ESM2MetaGraph(ESM2Hypergraph):
             # Determine topological class based on prime structure
             topological_class = self._classify_tensor_topology(shape_type)
             
-            # Create tensor bundle
+            # Determine computational mode and operator type from shape type
+            spatial_count = sum(1 for mode in shape_type.computational_modes 
+                              if mode == ComputationalMode.SPATIAL_CONCURRENT)
+            temporal_count = sum(1 for mode in shape_type.computational_modes 
+                               if mode == ComputationalMode.TEMPORAL_ASYMMETRIC)
+            
+            computational_mode = (ComputationalMode.SPATIAL_CONCURRENT 
+                                if spatial_count >= temporal_count 
+                                else ComputationalMode.TEMPORAL_ASYMMETRIC)
+            
+            prime_count = sum(1 for op_type in shape_type.operator_types 
+                            if op_type == OperatorType.PRIME_INDEX_GRAMMAR)
+            product_count = sum(1 for op_type in shape_type.operator_types 
+                              if op_type == OperatorType.PRODUCT_GRAMMAR)
+            
+            operator_type = (OperatorType.PRIME_INDEX_GRAMMAR 
+                           if prime_count >= product_count 
+                           else OperatorType.PRODUCT_GRAMMAR)
+            
+            # Extract node values and edge weights for fractal structure
+            all_node_values = []
+            all_edge_weights = []
+            for nv, ew in zip(shape_type.node_values, shape_type.edge_weights):
+                all_node_values.extend(nv)
+                all_edge_weights.extend(ew)
+            
+            # Create tensor bundle with optimization features
             bundle = TensorBundle(
                 base_type=type_sig,
                 fiber_nodes=set(node_ids),
                 bundle_dimension=len(shape_type.dimensions),
-                topological_class=topological_class
+                topological_class=topological_class,
+                computational_mode=computational_mode,
+                operator_type=operator_type,
+                node_values=sorted(set(all_node_values)),
+                edge_weights=sorted(set(all_edge_weights)),
+                reducibility_pattern=shape_type.reducibility_pattern
             )
             
             self.tensor_bundles[type_sig] = bundle
@@ -138,26 +182,52 @@ class ESM2MetaGraph(ESM2Hypergraph):
         for edge_id, edge in self.edges.items():
             input_types = []
             output_types = []
+            spatial_concurrent_nodes = []
+            temporal_sequence_nodes = []
             
-            # Collect input tensor types
+            # Collect input tensor types and analyze computational modes
             for source_id in edge.source_nodes:
                 if source_id in self.nodes:
                     node = self.nodes[source_id]
                     if node.output_shape_type:
                         input_types.append(node.output_shape_type.type_signature)
                         
-            # Collect output tensor types  
+                        # Classify node by computational mode
+                        shape_type = node.output_shape_type
+                        spatial_count = sum(1 for mode in shape_type.computational_modes 
+                                          if mode == ComputationalMode.SPATIAL_CONCURRENT)
+                        if spatial_count > 0:
+                            spatial_concurrent_nodes.append(source_id)
+                        else:
+                            temporal_sequence_nodes.append(source_id)
+                        
+            # Collect output tensor types and analyze computational modes
             for target_id in edge.target_nodes:
                 if target_id in self.nodes:
                     node = self.nodes[target_id]
                     if node.input_shape_type:
                         output_types.append(node.input_shape_type.type_signature)
                         
+                        # Classify node by computational mode
+                        shape_type = node.input_shape_type
+                        spatial_count = sum(1 for mode in shape_type.computational_modes 
+                                          if mode == ComputationalMode.SPATIAL_CONCURRENT)
+                        if spatial_count > 0:
+                            spatial_concurrent_nodes.append(target_id)
+                        else:
+                            temporal_sequence_nodes.append(target_id)
+                        
             # Determine type transformation and compatibility
             type_transformation = self._analyze_type_transformation(input_types, output_types)
             compatibility_score = self._compute_compatibility_score(input_types, output_types)
             
-            # Create typed hyperedge
+            # Compute P=NP optimization class
+            computational_complexity = self._compute_pnp_complexity(input_types, output_types)
+            
+            # Compute fractal depth
+            fractal_depth = self._compute_fractal_depth(input_types + output_types)
+            
+            # Create typed hyperedge with optimization features
             typed_edge = TypedHyperEdge(
                 id=edge.id,
                 name=edge.name,
@@ -167,7 +237,11 @@ class ESM2MetaGraph(ESM2Hypergraph):
                 input_types=input_types,
                 output_types=output_types,
                 type_transformation=type_transformation,
-                compatibility_score=compatibility_score
+                compatibility_score=compatibility_score,
+                computational_complexity=computational_complexity,
+                spatial_concurrent_nodes=spatial_concurrent_nodes,
+                temporal_sequence_nodes=temporal_sequence_nodes,
+                fractal_depth=fractal_depth
             )
             
             self.typed_edges[edge_id] = typed_edge
@@ -188,6 +262,45 @@ class ESM2MetaGraph(ESM2Hypergraph):
             return f"split_1to{len(output_types)}"
         else:
             return f"complex_{len(input_types)}to{len(output_types)}"
+            
+    def _compute_pnp_complexity(self, input_types: List[str], output_types: List[str]) -> str:
+        """Compute P=NP optimization class for the edge.
+        
+        Since we have no addition/polynomials in prime factorization system,
+        all operations are in P class due to multiplicative structure.
+        """
+        all_types = input_types + output_types
+        
+        # Count reducible vs irreducible types
+        reducible_count = 0
+        irreducible_count = 0
+        
+        for type_sig in all_types:
+            if type_sig in self.shape_registry.types:
+                shape_type = self.shape_registry.types[type_sig]
+                if 'R' in shape_type.reducibility_pattern:
+                    reducible_count += 1
+                if 'I' in shape_type.reducibility_pattern:
+                    irreducible_count += 1
+        
+        if reducible_count > irreducible_count:
+            return "P_SPATIAL_CONCURRENT"  # Reducible products in spatial modes
+        elif irreducible_count > 0:
+            return "P_TEMPORAL_SEQUENCE"   # Irreducible primes in temporal modes
+        else:
+            return "P_VARIABLE"            # Variable batch dimensions
+            
+    def _compute_fractal_depth(self, type_signatures: List[str]) -> int:
+        """Compute fractal depth based on prime power structures."""
+        max_depth = 0
+        
+        for type_sig in type_signatures:
+            if type_sig in self.shape_registry.types:
+                shape_type = self.shape_registry.types[type_sig]
+                fractal_info = shape_type.get_fractal_structure()
+                max_depth = max(max_depth, fractal_info["max_power"])
+                
+        return max_depth
             
     def _compute_compatibility_score(self, input_types: List[str], output_types: List[str]) -> float:
         """Compute compatibility score between input and output tensor types."""
@@ -316,7 +429,7 @@ class ESM2MetaGraph(ESM2Hypergraph):
         }
         
     def visualize_metagraph_summary(self) -> str:
-        """Generate a text summary of the metagraph structure."""
+        """Generate a text summary of the metagraph structure with optimization features."""
         analysis = self.get_topos_analysis()
         
         summary = "ESM-2 MetaGraph with Tensor Shape Types\n"
@@ -331,6 +444,24 @@ class ESM2MetaGraph(ESM2Hypergraph):
         summary += f"- Unique Mathematical Structures: {type_stats['unique_mathematical_structures']}\n"
         summary += f"- Nodes with Types: {type_stats['total_nodes']}\n\n"
         
+        # NEW: Optimization features analysis
+        if 'computational_mode_distribution' in type_stats:
+            summary += "Topological Optimization Configuration:\n"
+            summary += "- Operator Types:\n"
+            for op_type, count in type_stats['operator_type_distribution'].items():
+                summary += f"  * {op_type.replace('_', ' ').title()}: {count} types\n"
+            summary += "- Computational Modes:\n"
+            for mode, count in type_stats['computational_mode_distribution'].items():
+                summary += f"  * {mode.replace('_', ' ').title()}: {count} types\n"
+            
+            # P=NP optimization summary
+            pnp_opt = type_stats['p_equals_np_optimization']
+            summary += "- P=NP Optimization:\n"
+            summary += f"  * Polynomial Class Eliminated: {pnp_opt['polynomial_class_eliminated']}\n"
+            summary += f"  * Spatial Concurrent Advantage: {pnp_opt['spatial_concurrent_advantage']}\n"
+            summary += f"  * Temporal Sequence Complexity: {pnp_opt['temporal_sequence_complexity']}\n"
+            summary += "\n"
+        
         # Bundle information
         bundle_stats = analysis['bundle_statistics']
         summary += "Tensor Bundle Fibration:\n"
@@ -340,6 +471,16 @@ class ESM2MetaGraph(ESM2Hypergraph):
         for dim, count in sorted(bundle_stats['dimension_distribution'].items()):
             summary += f"  * Rank-{dim} Bundles: {count}\n"
         summary += "\n"
+        
+        # NEW: Fractal structure analysis
+        if 'fractal_structure' in type_stats:
+            fractal = type_stats['fractal_structure']
+            summary += "Fractal Neural Network Structure:\n"
+            summary += f"- Max Prime Depth: {fractal['max_prime_depth']}\n"
+            summary += f"- Unique Primes: {len(fractal['unique_primes_across_all'])}\n"
+            summary += f"- Power Distribution: {dict(list(fractal['power_distribution'].items())[:5])}\n"
+            summary += f"- Reducibility Patterns: {len(fractal['reducibility_patterns'])}\n"
+            summary += "\n"
         
         # Topos structure
         summary += "Metagraph Topos Structure:\n"
