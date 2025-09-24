@@ -191,6 +191,15 @@ graph TD
 - `hypergraph_query.py`: Query engine for hypergraph analysis
 - `main.py`: Main script to generate the hypergraph
 - **`hypergredient_framework.py`**: Revolutionary cosmetic formulation optimization system
+- **`cosmetic_cheminformatics_bridge.py`**: Bridge between hypergredient and cheminformatics frameworks
+
+### Cosmetic Chemistry Framework
+- `cheminformatics/types/atom_types.script`: OpenCog atom types for cosmetic chemistry (35+ types)
+- `docs/COSMETIC_CHEMISTRY.md`: Comprehensive documentation and reference guide
+- `examples/python/cosmetic_intro_example.py`: Basic cosmetic chemistry introduction
+- `examples/python/cosmetic_chemistry_example.py`: Advanced formulation analysis and optimization
+- `examples/scheme/cosmetic_formulation.scm`: Complex formulation modeling with OpenCog
+- `examples/scheme/cosmetic_compatibility.scm`: Simple ingredient interaction checking
 
 ### Structure Analysis Modules
 - `structure_analysis.py`: ESM-2 structure prediction analysis
@@ -292,6 +301,97 @@ for method, speedup_list in speedups.items():
 # Metagenomic scalability
 meta = report["metagenomic_scalability"]
 print(f"617M proteins: {meta['speedup_factor']:.1f}x faster than AlphaFold2")
+```
+
+### 🧬 Cosmetic Chemistry Framework Usage
+
+The repository now includes a comprehensive **OpenCog Cheminformatics Framework** for cosmetic chemistry applications with seamless integration to the existing hypergredient system.
+
+#### Basic Cosmetic Chemistry Analysis
+
+```python
+from examples.python.cosmetic_intro_example import CosmeticChemistryFramework
+
+# Initialize framework
+framework = CosmeticChemistryFramework()
+
+# Check ingredient compatibility
+compatibility = framework.check_compatibility("Vitamin C", "Retinol")
+print(f"Compatible: {compatibility['compatible']}")
+print(f"Reason: {compatibility['reason']}")
+
+# Create and validate formulations
+moisturizer = framework.create_formulation("Daily Moisturizer", AtomType.SKINCARE_FORMULATION)
+moisturizer.add_ingredient(framework.get_ingredient("Hyaluronic Acid"))
+moisturizer.add_ingredient(framework.get_ingredient("Niacinamide"))
+
+validation = framework.validate_formulation(moisturizer)
+print(f"Formulation valid: {validation['valid']}")
+```
+
+#### Advanced Formulation Analysis
+
+```python
+from examples.python.cosmetic_chemistry_example import AdvancedCosmeticChemistryFramework
+
+# Initialize advanced framework
+framework = AdvancedCosmeticChemistryFramework()
+
+# Comprehensive stability assessment
+stability = framework.assess_stability(your_formulation)
+print(f"Overall stability: {stability.overall_score:.2f}/1.0")
+print(f"Shelf life: {stability.shelf_life_months} months")
+
+# Regulatory compliance checking
+compliance = framework.check_regulatory_compliance(your_formulation, "EU")
+print(f"EU compliant: {compliance.compliant}")
+
+# Multi-objective optimization
+optimization = framework.optimize_formulation(your_formulation, ["stability", "cost", "safety"])
+print(f"Predicted efficacy: {optimization.efficacy_prediction:.1%}")
+```
+
+#### Integrated Hypergredient-Cheminformatics Analysis
+
+```python
+from cosmetic_cheminformatics_bridge import CosmeticCheminformaticsBridge
+from hypergredient_framework import FormulationRequest
+
+# Initialize integrated system
+bridge = CosmeticCheminformaticsBridge()
+
+# Define formulation requirements
+request = FormulationRequest(
+    target_concerns=['wrinkles', 'firmness'],
+    secondary_concerns=['dryness'],
+    skin_type='normal_to_dry',
+    budget=800.0,
+    preferences=['gentle', 'stable']
+)
+
+# Get comprehensive analysis combining both frameworks
+analysis = bridge.enhanced_formulation_analysis(request)
+report = bridge.generate_comprehensive_report(request)
+print(report)
+```
+
+#### Interactive Scheme Examples
+
+Load the Scheme examples for OpenCog integration:
+
+```scheme
+;; Load the cosmetic chemistry atom types
+(load "cheminformatics/types/atom_types.script")
+
+;; Load formulation analysis system
+(load "examples/scheme/cosmetic_formulation.scm")
+
+;; Run interactive compatibility checker
+(load "examples/scheme/cosmetic_compatibility.scm")
+
+;; Use interactive functions
+(quick-check "retinol" "niacinamide")
+(analyze-routine "EVENING" '("retinol" "hyaluronic_acid"))
 ```
 
 ### 🧬 Hypergredient Framework Usage
